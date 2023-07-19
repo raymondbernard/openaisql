@@ -94,7 +94,7 @@
             
             var preElement = document.createElement("pre");
             preElement.className = "bg-dark text-light p-3";
-            preElement.innerHTML = codePart;
+            preElement.innerHTML = codePart.replace('sql\n', ''); // removing 'sql\n'
             botDiv.appendChild(preElement);
 
             if(additionalText) {
@@ -112,4 +112,3 @@
 
     </body>
 </html>
-
