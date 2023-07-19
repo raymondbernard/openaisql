@@ -86,8 +86,9 @@
             var botDiv = document.createElement("div");
             botDiv.className = "message bot";
             
-            var responsePart = botMessage.split('```sql')[0];
-            var codePart = botMessage.split('```sql')[1].replace('```', ''); // Removing the end backticks
+            var responsePart = botMessage.split('```')[0];
+            var codePart = botMessage.split('```')[1];
+            var additionalText = botMessage.split('```')[2];
             
             botDiv.innerHTML = "<strong>OpenAI tutor:</strong> " + responsePart;
             
@@ -95,6 +96,13 @@
             preElement.className = "bg-dark text-light p-3";
             preElement.innerHTML = codePart;
             botDiv.appendChild(preElement);
+
+            if(additionalText) {
+              var additionalTextDiv = document.createElement("div");
+              additionalTextDiv.innerHTML = additionalText;
+              botDiv.appendChild(additionalTextDiv);
+            }
+            
             chatbox.appendChild(botDiv);
             
             chatbox.scrollTop = chatbox.scrollHeight;
@@ -104,3 +112,4 @@
 
     </body>
 </html>
+
