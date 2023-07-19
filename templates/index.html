@@ -2,14 +2,20 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Chat with Chan</title>
+    <title>Chat with your OpenAI Tutor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <style>
       body {
-        font-family: Arial, sans-serif;
-        font-size: 16px;
+        font-family: 'Roboto', sans-serif;
+        font-size: 24px;
+        color: black;
+        background-color: powderblue;
       }
       .chatbox {
         height: 400px;
+        width: 80%;
+        margin: auto;
         overflow: auto;
         border: 1px solid #ccc;
         padding: 10px;
@@ -17,25 +23,47 @@
       .message {
         margin-bottom: 10px;
       }
-      .user {
-        color: blue;
-      }
-      .bot {
-        color: green;
+      .input-container {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        margin: auto;
       }
       input[type="text"] {
-        width: 100%;
+        flex-grow: 1;
         padding: 10px;
         box-sizing: border-box;
         border: 1px solid #ccc;
       }
+      button {
+        margin-left: 10px;
+      }
+      .centered-content {
+        text-align: center;
+      }
+      .disclaimer {
+        text-align: center;
+        font-size: 0.8em;
+      }
+      img {
+        display: block;
+        margin: auto;
+      }
     </style>
   </head>
   <body>
-    <h1>Chat with Chan</h1>
+    <header class="centered-content">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c9/OpenAI_Logo_%282%29.svg" alt="OpenAI Logo" width="200">
+      <h1>Chat with your OpenAI Tutor</h1>
+    </header>
     <div class="chatbox" id="chatbox"></div>
-    <input type="text" id="message" placeholder="Type your message here...">
-    <button id="send">Send</button>
+    <div class="input-container">
+      <input type="text" id="message" placeholder="Type your message here...">
+      <button id="send" class="btn btn-primary">Send</button>
+    </div>
+    <footer>
+      <p class="disclaimer">Use at your own risk. The information generated may be inaccurate.</p>
+    </footer>
     <script>
       var chatbox = document.getElementById("chatbox");
       var message = document.getElementById("message");
@@ -54,16 +82,19 @@
           .then(function(response) {
             return response.text();
           })
-          .then(function(botMessage
-          ) {
+          .then(function(botMessage) {
             var botDiv = document.createElement("div");
             botDiv.className = "message bot";
-            botDiv.innerHTML = "<strong>Chan:</strong> " + botMessage;
+            var preElement = document.createElement("pre");
+            preElement.className = "bg-dark text-light p-3";
+            preElement.innerHTML = botMessage;
+            botDiv.innerHTML = "<strong>OpenAI tutor:</strong> ";
+            botDiv.appendChild(preElement);
             chatbox.appendChild(botDiv);
             
             chatbox.scrollTop = chatbox.scrollHeight;
         });
-        });
+      });
     </script>
 
     </body>
