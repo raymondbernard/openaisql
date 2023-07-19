@@ -85,10 +85,15 @@
           .then(function(botMessage) {
             var botDiv = document.createElement("div");
             botDiv.className = "message bot";
+            
+            var responsePart = botMessage.split('```sql')[0];
+            var codePart = botMessage.split('```sql')[1].replace('```', ''); // Removing the end backticks
+            
+            botDiv.innerHTML = "<strong>OpenAI tutor:</strong> " + responsePart;
+            
             var preElement = document.createElement("pre");
             preElement.className = "bg-dark text-light p-3";
-            preElement.innerHTML = botMessage;
-            botDiv.innerHTML = "<strong>OpenAI tutor:</strong> ";
+            preElement.innerHTML = codePart;
             botDiv.appendChild(preElement);
             chatbox.appendChild(botDiv);
             
